@@ -6,6 +6,7 @@ export const Header = () => {
   const cartItems = useSelector((state) => state.cart.cartList);
   const activeStyle = "block py-2 pl-3 pr-4 text-[#000000] bg-[#eee] rounded";
   const inactiveStyle = "block py-2 pl-3 pr-4 text-[#000000] bg-white rounded";
+  
   return (
     <header className="max-w-[1200px] m-auto h-[70px] text-lg border-b-2 border-solid border-[#eee] flex justify-between items-center py-0 px-3">
       <Link to="/" className="flex items-center">
