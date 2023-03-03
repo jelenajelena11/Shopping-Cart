@@ -1,17 +1,19 @@
 import { useEffect, useState } from "react";
-import { useCart } from "../context/CartContext";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart, removeFromCart } from "../store/cartSlice";
 import { Button } from "./Button";
 
 export const Card = ({ product }) => {
-  const { addToCart, cartItems, removeFromCart } = useCart();
-  const [isInCart, setIsInCart] = useState(false);
+  const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cart.cartList);
+  const [inTheCart, setInTheCart] = useState(false);
 
   useEffect(() => {
-    const productsCart = cartItems.find((item) => item.id === product.id);
-    if (productsCart) {
-      setIsInCart(true);
+    const isInCart = cartItems.find((item) => item.id === product.id);
+    if (isInCart) {
+      setInTheCart(true);
     } else {
-      setIsInCart(false);
+      setInTheCart(false);
     }
   }, [cartItems, product.id]);
 
@@ -26,15 +28,15 @@ export const Card = ({ product }) => {
         <p className="my-4 font-semibold text-left">{product.name}</p>
         <div className="flex justify-between my-6 items-center">
           <span className="font-semibold">${product.price}</span>
-          {isInCart ? (
+          {inTheCart ? (
             <Button
-              onClick={() => removeFromCart(product)}
+              onClick={() => dispatch(removeFromCart(product))}
               text="Remove"
               className="text-white p-2 rounded bg-rose-600"
             />
           ) : (
             <Button
-              onClick={() => addToCart(product)}
+              onClick={() => dispatch(addToCart(product))}
               text="Add to Cart"
               className="py-2 px-3 rounded hover:bg-[#103F80] bg-[#103f80d9] text-white border border-transparent"
             />

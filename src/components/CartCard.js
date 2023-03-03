@@ -1,8 +1,9 @@
-import { useCart } from "../context/CartContext";
+import { useDispatch } from "react-redux";
+import { removeFromCart } from "../store/cartSlice";
 import { Button } from "./Button";
 
 export const CartCard = ({ product }) => {
-  const { removeFromCart } = useCart();
+  const dispatch = useDispatch();
   return (
     <div className="flex justify-between items-center my-[30px] mx-[10px] flex-wrap shadow-md p-3">
       <img
@@ -15,7 +16,7 @@ export const CartCard = ({ product }) => {
       <Button
         text="Remove"
         className="text-white p-2 rounded bg-rose-600"
-        onClick={() => removeFromCart(product)}
+        onClick={() => dispatch(removeFromCart(product))}
       />
     </div>
   );

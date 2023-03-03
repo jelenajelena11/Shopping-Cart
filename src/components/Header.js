@@ -1,9 +1,9 @@
+import { useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import cart from "../assets/images/cart.png";
-import { useCart } from "../context/CartContext";
 
 export const Header = () => {
-  const { cartItems } = useCart();
+  const cartItems = useSelector((state) => state.cart.cartList);
   const activeStyle = "block py-2 pl-3 pr-4 text-[#000000] bg-[#eee] rounded";
   const inactiveStyle = "block py-2 pl-3 pr-4 text-[#000000] bg-white rounded";
   return (
